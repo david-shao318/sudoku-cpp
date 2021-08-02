@@ -10,6 +10,7 @@
 using namespace std;
 
 
+// special function to display grid
 ostream& operator<<(ostream& os, const array<array<int, 9>, 9>& puzzleGrid) {
     for(int r{0}; r < 9; r++) {
         os << ' ';
@@ -31,6 +32,7 @@ ostream& operator<<(ostream& os, const array<array<int, 9>, 9>& puzzleGrid) {
 
 class Sudoku {
 
+    // private function to find seen numbers given grid position
     void seenNumbers(array<bool, 10>& vu, int row, int col) {
         for(int i{0}; i < 9; i++) {
             vu[grid[i][col]] = true;
@@ -47,6 +49,8 @@ public:
     unsigned int solutionCount{0};
     array<array<int, 9>, 9> grid;
 
+    
+    // constructor: open file and import into grid (2D array)
     Sudoku(string fileName) {
         string inputRow;
         ifstream inputFile;
@@ -61,8 +65,10 @@ public:
         }
     }
 
+    
+    // recursive backtrack to find solutions
     void solve(int startRow=0, int startCol=0) {
-        array<bool, 10> seen;
+        array<bool, 10> seen;  // denotes whether each number has been seen (is invalid) at given position
 
         for(int r{startRow}; r < 9; r++) {
             for(int c{startCol}; c < 9; c++) {
@@ -72,10 +78,10 @@ public:
                     seenNumbers(seen, r, c);
 
                     for(int potential{1}; potential < 10; potential++) {
-                        if(!seen[potential]) {
+                        if(!seen[potential]) {  // if False, potential has not been seen, is valid
                             grid[r][c] = potential;
-                            solve(r, c);
-                            grid[r][c] = 0;
+                            solve(r, c);  // continue solve
+                            grid[r][c] = 0;  // backtrack
                         }
                     }
                     return;
