@@ -63,6 +63,8 @@ public:
                     grid[i][j] = inputRow[j] - '0';
             }
         }
+
+        inputFile.close();
     }
 
     
