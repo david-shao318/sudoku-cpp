@@ -93,7 +93,7 @@ public:
                 startCol = 0;
         }
 
-        cout << "\n———Possible Solution———\n" << this->grid;  // print possible solution
+        cout << "\n———Possible Solution———\n" << grid;  // print possible solution
         solutionCount++;
     }
 };
