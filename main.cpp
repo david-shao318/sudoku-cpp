@@ -10,7 +10,7 @@
 using namespace std;
 
 
-// special function to display grid
+// overloaded operator to display grid
 ostream& operator<<(ostream& os, const array<array<int, 9>, 9>& puzzleGrid) {
     for(int r{0}; r < 9; r++) {
         os << ' ';
@@ -32,7 +32,7 @@ ostream& operator<<(ostream& os, const array<array<int, 9>, 9>& puzzleGrid) {
 
 class Sudoku {
 
-    // private function to find seen numbers given grid position
+    // private method to identify seen numbers given grid position
     void seenNumbers(array<bool, 10>& vu, int row, int col) {
         for(int i{0}; i < 9; i++) {
             vu[grid[i][col]] = true;
@@ -46,8 +46,8 @@ class Sudoku {
 
 
 public:
-    unsigned int solutionCount{0};
-    array<array<int, 9>, 9> grid;
+    unsigned int solutionCount{0};  // total number of solutions
+    array<array<int, 9>, 9> grid;  // puzzle grid
 
     
     // constructor: open file and import into grid (2D array)
@@ -75,7 +75,7 @@ public:
                 if(grid[r][c] == 0) {
 
                     seen.fill(false);
-                    seenNumbers(seen, r, c);
+                    seenNumbers(seen, r, c);  // find all invalid numbers
 
                     for(int potential{1}; potential < 10; potential++) {
                         if(!seen[potential]) {  // if False, potential has not been seen, is valid
@@ -93,7 +93,7 @@ public:
                 startCol = 0;
         }
 
-        cout << "\n———Possible Solution———\n" << this->grid;
+        cout << "\n———Possible Solution———\n" << this->grid;  // print possible solution
         solutionCount++;
     }
 };
@@ -102,9 +102,11 @@ public:
 int main() {
     clock_t start, stop;
 
+    // new puzzle grid
     Sudoku newGrid("grid.txt");
     cout << "————Original Sudoku————\n" << newGrid.grid;
 
+    // solve sudoku, timed
     start = clock();
     newGrid.solve();
     stop = clock();
