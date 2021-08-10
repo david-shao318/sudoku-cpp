@@ -89,7 +89,7 @@ public:
                     seenNumbers(seen, r, c);  // find all invalid numbers
 
                     for(int potential{1}; potential < 10; potential++) {
-                        if(!seen[potential]) {  // if False, potential has not been seen, is valid
+                        if(!seen[potential]) {  // if false, potential has not been seen, is valid
                             grid[r][c] = potential;
                             solve(r, c);  // continue solve
                             grid[r][c] = 0;  // backtrack
