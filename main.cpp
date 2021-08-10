@@ -52,15 +52,24 @@ public:
     
     // constructor: open file and import into grid (2D array)
     Sudoku(string fileName) {
+        ifstream inputFile(fileName);
+        if(inputFile.fail()) {
+            cout << "File does not exist. Exiting...\n";
+            exit(0);
+        }
+
         string inputRow;
-        ifstream inputFile;
-        inputFile.open(fileName, ios::in);
+        int inputVal;
         
         for(int i{0}; i < 9; i++) {
             inputFile >> inputRow;
             if(inputFile.good()) {
-                for(int j{0}; j < 9; j++)
-                    grid[i][j] = inputRow[j] - '0';
+                for(int j{0}; j < 9; j++) {
+                    inputVal = inputRow[j] - '0';
+                    if(inputVal < 0 || inputVal > 9)
+                        continue;
+                    grid[i][j] = inputVal;
+                }
             }
         }
 
