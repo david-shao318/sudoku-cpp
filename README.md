@@ -1,6 +1,6 @@
 # Sudoku Solver in C++
 
-C++ implementation of sudoku solver ([see Python implementation](https://github.com/david-shao318/sudoku)).
+C++ implementation of basic sudoku solver ([see Python implementation](https://github.com/david-shao318/sudoku)).
 
 ## Usage
 
